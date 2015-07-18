@@ -1,6 +1,8 @@
 package com.hack.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -22,9 +27,6 @@ public class Build implements Serializable {
 	@Column(name = "BUILD_ID")
 	private long id;
 
-	@Column(name="CLASS_ID")
-	private long classId;
-
 	@Column(name = "BUILD_NAME")
 	private String buildName;
 
@@ -33,6 +35,18 @@ public class Build implements Serializable {
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private CharacterClass characterClass;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	private CharacterRace characterRace;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	private Faction faction;
+	
+	@ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name="BUILD_SKILL", 
+                joinColumns={@JoinColumn(name="BUILD_ID")}, 
+                inverseJoinColumns={@JoinColumn(name="SKILL_ID")})
+	private Set<Skill> skills = new HashSet<Skill>();
 
 	public long getId() {
 		return id;
@@ -58,25 +72,17 @@ public class Build implements Serializable {
 		this.buildDescription = buildDescription;
 	}
 
-	public long getClassId() {
-		return classId;
-	}
-
-	public void setClassId(long classId) {
-		this.classId = classId;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-				* result
-				+ ((buildDescription == null) ? 0 : buildDescription.hashCode());
-		result = prime * result
-				+ ((buildName == null) ? 0 : buildName.hashCode());
-		result = prime * result + (int) (classId ^ (classId >>> 32));
+		result = prime * result + ((buildDescription == null) ? 0 : buildDescription.hashCode());
+		result = prime * result + ((buildName == null) ? 0 : buildName.hashCode());
+		result = prime * result + ((characterClass == null) ? 0 : characterClass.hashCode());
+		result = prime * result + ((characterRace == null) ? 0 : characterRace.hashCode());
+		result = prime * result + ((faction == null) ? 0 : faction.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((skills == null) ? 0 : skills.hashCode());
 		return result;
 	}
 
@@ -99,16 +105,36 @@ public class Build implements Serializable {
 				return false;
 		} else if (!buildName.equals(other.buildName))
 			return false;
-		if (classId != other.classId)
+		if (characterClass == null) {
+			if (other.characterClass != null)
+				return false;
+		} else if (!characterClass.equals(other.characterClass))
+			return false;
+		if (characterRace == null) {
+			if (other.characterRace != null)
+				return false;
+		} else if (!characterRace.equals(other.characterRace))
+			return false;
+		if (faction == null) {
+			if (other.faction != null)
+				return false;
+		} else if (!faction.equals(other.faction))
 			return false;
 		if (id != other.id)
+			return false;
+		if (skills == null) {
+			if (other.skills != null)
+				return false;
+		} else if (!skills.equals(other.skills))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Build [id=" + id + ", classId=" + classId + ", buildName="
-				+ buildName + ", buildDescription=" + buildDescription + "]";
+		return "Build [id=" + id + ", buildName=" + buildName + ", buildDescription=" + buildDescription
+				+ ", characterClass=" + characterClass + ", characterRace=" + characterRace + ", faction=" + faction
+				+ ", skills=" + skills + "]";
 	}
+
 }

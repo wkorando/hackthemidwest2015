@@ -1,5 +1,7 @@
 package com.hack.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "CHARACTER_CLASS")
-public class CharacterClass {
+public class CharacterClass implements Serializable{
+
+	private static final long serialVersionUID = 475670010275525616L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

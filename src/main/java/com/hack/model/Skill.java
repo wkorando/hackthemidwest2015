@@ -1,17 +1,24 @@
 package com.hack.model;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "SKILL")
-public class Skill {
+public class Skill implements Serializable {
+
+	private static final long serialVersionUID = 6153442601960426108L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,6 +33,9 @@ public class Skill {
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private SkillType skillType;
+	
+	@ManyToMany(mappedBy="skills")
+	private Set<Build> builds = new HashSet<Build>();
 
 	public long getId() {
 		return id;
@@ -63,14 +73,11 @@ public class Skill {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((builds == null) ? 0 : builds.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime
-				* result
-				+ ((skillDescription == null) ? 0 : skillDescription.hashCode());
-		result = prime * result
-				+ ((skillName == null) ? 0 : skillName.hashCode());
-		result = prime * result
-				+ ((skillType == null) ? 0 : skillType.hashCode());
+		result = prime * result + ((skillDescription == null) ? 0 : skillDescription.hashCode());
+		result = prime * result + ((skillName == null) ? 0 : skillName.hashCode());
+		result = prime * result + ((skillType == null) ? 0 : skillType.hashCode());
 		return result;
 	}
 
@@ -83,6 +90,11 @@ public class Skill {
 		if (getClass() != obj.getClass())
 			return false;
 		Skill other = (Skill) obj;
+		if (builds == null) {
+			if (other.builds != null)
+				return false;
+		} else if (!builds.equals(other.builds))
+			return false;
 		if (id != other.id)
 			return false;
 		if (skillDescription == null) {
@@ -105,8 +117,8 @@ public class Skill {
 
 	@Override
 	public String toString() {
-		return "Skill [id=" + id + ", skillName=" + skillName
-				+ ", skillDescription=" + skillDescription + ", skillType="
-				+ skillType.toString() + "]";
+		return "Skill [id=" + id + ", skillName=" + skillName + ", skillDescription=" + skillDescription
+				+ ", skillType=" + skillType + ", builds=" + builds + "]";
 	}
+
 }
