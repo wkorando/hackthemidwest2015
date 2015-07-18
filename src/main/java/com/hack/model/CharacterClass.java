@@ -2,15 +2,24 @@ package com.hack.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "CHARACTER_CLASS")
 public class CharacterClass {
 
-	@Column
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "CHARACTER_CLASS_ID")
 	private long id;
-	@Column
+	
+	@Column(name = "CLASS_NAME")
 	private String className;
-	@Column
+	
+	@Column(name = "CLASS_DESC")
 	private String classDescription;
 
 	public String getClassDescription() {
