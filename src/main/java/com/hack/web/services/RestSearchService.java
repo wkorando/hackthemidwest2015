@@ -11,7 +11,7 @@ import com.hack.model.Build;
 import com.hack.services.SearchCriteria;
 import com.hack.services.SearchService;
 
-@RestController
+//@RestController
 public class RestSearchService {
 	@Resource
 	private SearchService service;
