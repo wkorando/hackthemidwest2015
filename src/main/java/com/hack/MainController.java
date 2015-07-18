@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @EnableAutoConfiguration
 public class MainController {
 
-    @RequestMapping("/")
+    @RequestMapping("/main")
     @ResponseBody
     String home() {
         return "Greg Still Sucks!";
