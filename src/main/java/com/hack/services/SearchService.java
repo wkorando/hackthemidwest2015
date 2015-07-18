@@ -1,17 +1,16 @@
 package com.hack.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import com.hack.model.CharacterClass;
+import com.hack.model.Build;
 
 @Service
 public class SearchService {
 
-	public CharacterClass search(String name){
-		CharacterClass characterClass = new CharacterClass();
-		characterClass.setClassDescription("Healer/Tank");
-		characterClass.setClassName(name);
-		characterClass.setId(1L);
-		return characterClass;
+	public List<Build> search(SearchCriteria<?>[] searchCriteria){
+
+		return null;
 	}
 }
