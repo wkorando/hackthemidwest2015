@@ -2,49 +2,68 @@ package com.hack.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "BUILD")
-public class Build implements Serializable{
-
+public class Build implements Serializable {
 
 	private static final long serialVersionUID = 3299809239698289063L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "BUILD_ID")
 	private long id;
-	
+
+	@Column(name="CLASS_ID")
+	@ManyToOne(cascade=CascadeType.ALL, targetEntity=CharacterClass.class)
+	private long classId;
+
 	@Column(name = "BUILD_NAME")
 	private String buildName;
-	
+
 	@Column(name = "BUILD_DESC")
 	private String buildDescription;
-	
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public String getBuildName() {
 		return buildName;
 	}
+
 	public void setBuildName(String buildName) {
 		this.buildName = buildName;
 	}
+
 	public String getBuildDescription() {
 		return buildDescription;
 	}
+
 	public void setBuildDescription(String buildDescription) {
 		this.buildDescription = buildDescription;
 	}
+
+	public long getClassId() {
+		return classId;
+	}
+
+	public void setClassId(long classId) {
+		this.classId = classId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -54,9 +73,11 @@ public class Build implements Serializable{
 				+ ((buildDescription == null) ? 0 : buildDescription.hashCode());
 		result = prime * result
 				+ ((buildName == null) ? 0 : buildName.hashCode());
+		result = prime * result + (int) (classId ^ (classId >>> 32));
 		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -76,14 +97,16 @@ public class Build implements Serializable{
 				return false;
 		} else if (!buildName.equals(other.buildName))
 			return false;
+		if (classId != other.classId)
+			return false;
 		if (id != other.id)
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Build [id=" + id + ", buildName=" + buildName
-				+ ", buildDescription=" + buildDescription + "]";
+		return "Build [id=" + id + ", classId=" + classId + ", buildName="
+				+ buildName + ", buildDescription=" + buildDescription + "]";
 	}
 }
