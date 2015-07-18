@@ -1,17 +1,32 @@
 package com.hack.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Build {
+@Table(name = "BUILD")
+public class Build implements Serializable{
 
-	@Column
+
+	private static final long serialVersionUID = 3299809239698289063L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "BUILD_ID")
 	private long id;
-	@Column
+	
+	@Column(name = "BUILD_NAME")
 	private String buildName;
-	@Column
+	
+	@Column(name = "BUILD_DESC")
 	private String buildDescription;
+	
 	public long getId() {
 		return id;
 	}

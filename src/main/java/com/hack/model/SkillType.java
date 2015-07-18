@@ -2,15 +2,24 @@ package com.hack.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "SKILL_TYPE")
 public class SkillType {
 
-	@Column
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "SKILL_TYPE_ID")
 	private long id;
-	@Column
+	
+	@Column(name = "SKILL_TYPE_NAME")
 	private String skillTypeName;
-	@Column
+	
+	@Column(name = "SKILL_TYPE_DESC")
 	private String skillTypeDescription;
 	
 	public long getId() {
