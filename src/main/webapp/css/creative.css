@@ -175,10 +175,10 @@ aside {
 header {
     position: relative;
     width: 100%;
-    min-height: auto;
+    min-height: 50%;
     text-align: center;
     color: #fff;
-    background-image: url(../img/header.jpg);
+    background-image: url(../img/eso-builder-header.jpg);
     background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
