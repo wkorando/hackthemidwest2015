@@ -9,7 +9,7 @@ import com.hack.model.Build;
 
 public class TestPersistingEntities {
 	
-	private EntityManager entityManager = TestEntityManagerUtil.getEntityManager();
+	private EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
 	  public static void main(String[] args) {
 		TestPersistingEntities test = new TestPersistingEntities();

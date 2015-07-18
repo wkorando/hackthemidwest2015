@@ -23,7 +23,6 @@ public class Build implements Serializable {
 	private long id;
 
 	@Column(name="CLASS_ID")
-	@ManyToOne(cascade=CascadeType.ALL, targetEntity=CharacterClass.class)
 	private long classId;
 
 	@Column(name = "BUILD_NAME")
@@ -31,6 +30,9 @@ public class Build implements Serializable {
 
 	@Column(name = "BUILD_DESC")
 	private String buildDescription;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	private CharacterClass characterClass;
 
 	public long getId() {
 		return id;

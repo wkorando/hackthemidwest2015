@@ -1,10 +1,12 @@
 package com.hack.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,7 +24,7 @@ public class Skill {
 	@Column(name = "SKILL_DESC")
 	private String skillDescription;
 	
-	@Column(name = "SKILL_TYPE")
+	@ManyToOne(cascade=CascadeType.ALL)
 	private SkillType skillType;
 
 	public long getId() {
