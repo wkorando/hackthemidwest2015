@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -28,6 +29,7 @@ public class Skill implements Serializable {
 	@Column(name = "SKILL_NAME")
 	private String skillName;
 	
+	@Lob
 	@Column(name = "SKILL_DESC")
 	private String skillDescription;
 	
