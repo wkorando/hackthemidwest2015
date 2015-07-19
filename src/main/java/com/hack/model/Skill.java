@@ -11,8 +11,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -39,6 +41,10 @@ public class Skill implements Serializable {
 	
 	@ManyToMany(mappedBy="skills")
 	private Set<Build> builds = new HashSet<Build>();
+	
+	@ManyToOne
+    @JoinColumn(name="SKILL_LINE_ID")
+    private SkillLine skillLine;
 
 	public long getId() {
 		return id;
@@ -72,6 +78,22 @@ public class Skill implements Serializable {
 		this.skillType = skillType;
 	}
 
+	public Set<Build> getBuilds() {
+		return builds;
+	}
+
+	public void setBuilds(Set<Build> builds) {
+		this.builds = builds;
+	}
+
+	public SkillLine getSkillLine() {
+		return skillLine;
+	}
+
+	public void setSkillLine(SkillLine skillLine) {
+		this.skillLine = skillLine;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -79,6 +101,7 @@ public class Skill implements Serializable {
 		result = prime * result + ((builds == null) ? 0 : builds.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((skillDescription == null) ? 0 : skillDescription.hashCode());
+		result = prime * result + ((skillLine == null) ? 0 : skillLine.hashCode());
 		result = prime * result + ((skillName == null) ? 0 : skillName.hashCode());
 		result = prime * result + ((skillType == null) ? 0 : skillType.hashCode());
 		return result;
@@ -105,15 +128,17 @@ public class Skill implements Serializable {
 				return false;
 		} else if (!skillDescription.equals(other.skillDescription))
 			return false;
+		if (skillLine == null) {
+			if (other.skillLine != null)
+				return false;
+		} else if (!skillLine.equals(other.skillLine))
+			return false;
 		if (skillName == null) {
 			if (other.skillName != null)
 				return false;
 		} else if (!skillName.equals(other.skillName))
 			return false;
-		if (skillType == null) {
-			if (other.skillType != null)
-				return false;
-		} else if (!skillType.equals(other.skillType))
+		if (skillType != other.skillType)
 			return false;
 		return true;
 	}
@@ -121,7 +146,7 @@ public class Skill implements Serializable {
 	@Override
 	public String toString() {
 		return "Skill [id=" + id + ", skillName=" + skillName + ", skillDescription=" + skillDescription
-				+ ", skillType=" + skillType + ", builds=" + builds + "]";
+				+ ", skillType=" + skillType + ", builds=" + builds + ", skillLine=" + skillLine + "]";
 	}
 
 }
