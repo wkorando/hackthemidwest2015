@@ -4,15 +4,15 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -33,7 +33,8 @@ public class Skill implements Serializable {
 	@Column(name = "SKILL_DESC")
 	private String skillDescription;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@Enumerated(EnumType.STRING)
+	@Column(name = "SKILL_TYPE")
 	private SkillType skillType;
 	
 	@ManyToMany(mappedBy="skills")
