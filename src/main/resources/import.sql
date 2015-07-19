@@ -1,9 +1,3 @@
-delete from CHARACTER_CLASS;
-delete from CHARACTER_RACE;
-delete from FACTION;
-delete from SKILL;
-delete from SKILL_TYPE;
-delete from SKILL_LINE;
 insert into CHARACTER_CLASS(CHARACTER_CLASS_ID, CLASS_NAME, CLASS_DESC) values ('1','Dragon Knight','The powerful Dragon Knight wields the power of fire to dish out serious amounts of damage');
 insert into CHARACTER_CLASS(CHARACTER_CLASS_ID, CLASS_NAME, CLASS_DESC) values ('2','Sorcerer','These long range damage dealers have multiple skill trees that allow them to dish out powerful spells.');
 insert into CHARACTER_CLASS(CHARACTER_CLASS_ID, CLASS_NAME, CLASS_DESC) values ('3','Templar','The Templar is one of the most diverse classes in the game. Each skill tree allows you to do something different, ranging from tanking to crowd control effects to healing.');
