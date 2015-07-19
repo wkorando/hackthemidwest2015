@@ -1,4 +1,3 @@
-#import.sql file
 delete from CHARACTER_CLASS;
 delete from CHARACTER_RACE;
 delete from FACTION;
